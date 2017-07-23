@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huashuwa.jiang.dao.MemberDao">
+	<resultMap id="BaseResultMap" type="com.huashuwa.jiang.model.Members">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="parentId" property="parentId" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="className" property="className" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="parentNodeSymbol" property="parentNodeSymbol" jdbcType="VARCHAR" />
+		<result column="orderNum" property="orderNum" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 基础操作列-->
+	<sql id="Base_Column_List" >
+		id, parentId, name, className, description, parentNodeSymbol, orderNum
+	</sql>
+	
+	<!-- 别名，基础操作列-->
+	<sql id="Base_Column_List_ALIAS" >
+		member.id, member.parentId, member.name, member.className, member.description, member.parentNodeSymbol, member.orderNum
+	</sql>
+	
+	<!-- select测试 -->
+	<!-- 	resultType是自定义的类或者jdk自带的类 -->
+	<!-- 	resultMap是在mapperXMl文件中通过resultMap节点定义出来的 -->
+	<select id="getMemberByName" resultType="members">
+		select <include refid="Base_Column_List" /> from  hsw_members where name=#{name,jdbcType=VARCHAR}
+	</select>
+</mapper>

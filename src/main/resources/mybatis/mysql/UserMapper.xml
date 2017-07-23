@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huashuwa.jiang.dao.TestDao">
+	<resultMap id="BaseResultMap" type="com.huashuwa.jiang.model.User">
+		<id column="userId" property="userId" jdbcType="VARCHAR" />
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="birthday" property="birthday" jdbcType="DATE" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="active" property="active" jdbcType="BOOLEAN" />
+		<result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<!-- 基础操作列-->
+	<sql id="Base_Column_List" >
+		userId, userName, birthday, createTime, sex, phone, email, active, address
+	</sql>
+	
+	<!-- 全部列 -->
+	<sql id="All_Column_List" >
+		userId, userName, password, birthday, createTime, sex, phone, email, active, address
+	</sql>
+	
+	<!-- 别名，基础操作列-->
+	<sql id="Base_Column_List_ALIAS" >
+		users.userId, users.userName, users.birthday, users.createTime, users.sex, users.phone, users.email, users.active, users.address
+	</sql>
+	
+	<!-- select测试 -->
+	<select id="getUserById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from  hsw_users where userId=#{userId,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="updateUser1">
+		update hsw_users set userName='xiaoqiang-aa' where userId=#{userId1,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateUser2">
+		update hsw_users set userName='xiaoqiang-bb' where userId=#{userId2,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateUser">
+		update hsw_users set userName='xiaoqiang3' where userId=#{userId,jdbcType=VARCHAR}
+	</update>
+	
+	<insert id="insertUser" parameterType="user">  
+        insert into hsw_users (<include refid="All_Column_List" />) 
+              values (#{userId}, #{userName}, #{password}, #{birthday}, #{createTime}, #{sex}, #{phone}, #{email}, #{active}, #{address})  
+	</insert> 
+	
+	<delete id="deleteUser" parameterType="user">  
+        delete from hsw_users where userId=#{userId,jdbcType=VARCHAR}
+	</delete>  
+	
+</mapper>

@@ -1,0 +1,26 @@
+package com.pcitc.ubs.exception;
+/**
+ * 
+ * @Title: UnknownAccountTypeException.java 
+ * @Package com.pcitc.ubs.exception 
+ * @Description:  未知账户类型异常
+ * @author xiaolong.wei  
+ * @date 2015-12-5 下午12:54:19 
+ * @version V1.0
+ */
+public class UnknownAccountTypeException extends RuntimeException{
+	
+	private static final long serialVersionUID = 8147405639266436991L;
+
+	public UnknownAccountTypeException(){
+		super();
+	}
+	
+	public UnknownAccountTypeException(String message){
+		super(message);
+	}
+	
+	public UnknownAccountTypeException(String message,Throwable casue){
+		super(message,casue);
+	}
+}

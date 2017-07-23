@@ -1,0 +1,27 @@
+package com.pcitc.ubs.exception;
+
+/**
+ * 
+ * @Title: LoginAuthenticationException.java 
+ * @Package com.pcitc.ubs.exception 
+ * @Description:  登录验证异常
+ * @author xiaolong.wei  
+ * @date 2015-12-3 上午10:40:46 
+ * @version V1.0
+ */
+public class LoginAuthenticationException extends RuntimeException{
+	
+	private static final long serialVersionUID = -3960328194907050648L;
+
+	public LoginAuthenticationException(){
+		super();
+	}
+	
+	public LoginAuthenticationException(String message){
+		super(message);
+	}
+	
+	public LoginAuthenticationException(String message,Throwable casue){
+		super(message,casue);
+	}
+}

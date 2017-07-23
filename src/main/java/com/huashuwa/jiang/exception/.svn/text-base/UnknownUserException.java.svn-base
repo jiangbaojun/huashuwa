@@ -1,0 +1,27 @@
+package com.pcitc.ubs.exception;
+
+/**
+ * 
+ * @Title: UnknownUserException.java 
+ * @Package com.pcitc.ubs.exception 
+ * @Description:  未知用户异常类
+ * @author xiaolong.wei  
+ * @date 2015-11-23 下午1:45:49 
+ * @version V1.0
+ */
+public class UnknownUserException extends RuntimeException{
+	
+	private static final long serialVersionUID = -1453453562698088104L;
+
+	public UnknownUserException(){
+		super();
+	}
+	
+	public UnknownUserException(String message){
+		super(message);
+	}
+	
+	public UnknownUserException(String message,Throwable casue){
+		super(message,casue);
+	}
+}

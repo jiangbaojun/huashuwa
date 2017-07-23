@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings> 
+         <!-- 配置 useGeneratedKeys，可以在insert时返回id-->
+        <setting name="useGeneratedKeys" value="true" /> 
+    </settings>
+    
+    <!-- 命名空间 -->
+     <typeAliases>
+		<package name="com.huashuwa.jiang.model"/>
+		<package name="com.huashuwa.common.utils.page"/>
+    </typeAliases>
+
+	<plugins>
+		<!-- 分页拦截插件 -->
+		<plugin interceptor="com.huashuwa.common.utils.page.PagePlugin">
+			<!--数据库类型，mysql或oracle-->
+			<property name="dialect" value="mysql"/>
+			<!--对于分页sql，要拦截的sql后缀，listPage。勿改-->
+			<property name="pageSqlId" value=".*(?i)listPage.*"/>
+		</plugin>
+	</plugins>
+</configuration>

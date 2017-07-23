@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/Sinopec-SSC/!svn/ver/5545/ubs/trunk/ubs-all/ubs/src/main/java/com/pcitc/ubs/exception
+END
+LoginAuthenticationException.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Sinopec-SSC/!svn/ver/3980/ubs/trunk/ubs-all/ubs/src/main/java/com/pcitc/ubs/exception/LoginAuthenticationException.java
+END
+UbsRuntimeException.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/Sinopec-SSC/!svn/ver/5545/ubs/trunk/ubs-all/ubs/src/main/java/com/pcitc/ubs/exception/UbsRuntimeException.java
+END
+UnknownUserException.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/Sinopec-SSC/!svn/ver/3794/ubs/trunk/ubs-all/ubs/src/main/java/com/pcitc/ubs/exception/UnknownUserException.java
+END
+VerifyException.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/Sinopec-SSC/!svn/ver/4318/ubs/trunk/ubs-all/ubs/src/main/java/com/pcitc/ubs/exception/VerifyException.java
+END
+ExceptionTypeDefine.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/Sinopec-SSC/!svn/ver/5545/ubs/trunk/ubs-all/ubs/src/main/java/com/pcitc/ubs/exception/ExceptionTypeDefine.java
+END
+UnknownAccountTypeException.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/Sinopec-SSC/!svn/ver/4077/ubs/trunk/ubs-all/ubs/src/main/java/com/pcitc/ubs/exception/UnknownAccountTypeException.java
+END
