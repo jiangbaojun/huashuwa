@@ -1,6 +1,8 @@
 package com.huashuwa.common.utils;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 /**
  * 类名称：	Log4jUtil  
@@ -14,97 +16,152 @@ import org.apache.log4j.Logger;
 public class Log4jUtil {
 
 	/** 操作用户ID*/
-	private String userLogsStr = "userId:";
+	private String userLogsStr = "操作用户:";
 	
 	/**logger对象*/
 	private Logger logger = null;
 	
+	/** 初始logger类 */
+	private Class<?> oldClass = null;
+	
 	/**
 	 * Log4jUtil(创建一个新的实例 Log4jUtil)
 	 * @param 			ubsClass 			logger记录class
-	 * @param 			userId 				用户ID
 	 * @since  1.0.0
 	 */
-	public Log4jUtil(Class<?> ubsClass){
-		logger=Logger.getLogger(ubsClass);
+	public Log4jUtil(Class<?> logClass){
+		oldClass = logClass;
+		logger=Logger.getLogger(logClass);
 	}
 	
 	/**
-	 * 
-	 * selectLogs(查询操作时记录必要敏感数据)
-	 * @param 			selestInfo  		必要敏感数据      
-	 * @param			userId				用户ID
-	 * @exception    
+	 * 查询操作记录
+	 * @param selestInfo 查询内容
+	 * @param userId 操作用户
+	 * @param loggerName  日志输出的定义的logger，在配置文件中定义的，如（log4j.logger.reportLogger）
+	 * @author 姜宝俊
 	 * @since  1.0.0
 	 */
-	public void selectLogs(String selestInfo, Object userId){
+	public void selectLogs(String selestInfo, Object userId, String loggerName){
+		setLogger(loggerName);
 		if(VerifyHandler.INSTANCE.isVerify(userId)){
 			logger.info(userLogsStr + userId + ",查询内容:" + selestInfo);
 		}else{
 			logger.info("查询内容:" + selestInfo);
 		}
+		restoreLogger();
 	}
 	
 	/**
-	 * 
-	 * updateLogs(修改操作时记录必要非敏感数据)
-	 * @param 			updateInfo  		必要敏感数据   
-	 * @param			userId				用户ID 
-	 * @exception    
+	 * 更新操作记录
+	 * @param updateInfo 更新内容
+	 * @param userId 操作用户
+	 * @param loggerName  logger名称
+	 * @name	updateLogs 
+	 * @createTime	2017年7月24日 上午9:13:16  
+	 * @author 姜宝俊
 	 * @since  1.0.0
 	 */
-	public void updateLogs(String updateInfo, Object userId){
+	public void updateLogs(String updateInfo, Object userId, String loggerName){
+		setLogger(loggerName);
 		if(VerifyHandler.INSTANCE.isVerify(userId)){
-			logger.info(userLogsStr + userId + ",修改数据: " + updateInfo);
+			logger.info(userLogsStr + userId + ",修改内容: " + updateInfo);
 		}else{
-			logger.info("修改数据: " + updateInfo);
+			logger.info("修改内容: " + updateInfo);
 		}
+		restoreLogger();
 	}
-	
+
 	/**
-	 * 
-	 * deleteLogs(删除操作时记录必要非敏感数据) 
-	 * @param 			deleteInfo  		必要非敏感数据     
-	 * @param			userId				用户ID 
-	 * @exception    
+	 * 删除操作记录
+	 * @param updateInfo 删除内容
+	 * @param userId 操作用户
+	 * @param loggerName  logger名称
+	 * @createTime	2017年7月24日 上午9:16:31  
+	 * @author 姜宝俊
 	 * @since  1.0.0
 	 */
-	public void deleteLogs(String deleteInfo, Object userId){
+	public void deleteLogs(String deleteInfo, Object userId, String loggerName){
+		setLogger(loggerName);
 		if(VerifyHandler.INSTANCE.isVerify(userId)){
-			logger.info(userLogsStr + userId + ",删除数据:" + deleteInfo);
+			logger.info(userLogsStr + userId + ",删除内容:" + deleteInfo);
 		}else{
-			logger.info("删除数据:" + deleteInfo);
+			logger.info("删除内容:" + deleteInfo);
 		}
+		restoreLogger();
 	}
 	
 	/**
-	 * 
-	 * insertLogs(插入操作时记录必要非敏感数据 )
-	 * @param 			insertInfo  		必要非敏感数据   
-	 * @param			userId				用户ID 
-	 * @exception    
+	 * 插入操作记录
+	 * @param updateInfo 插入内容
+	 * @param userId 操作用户
+	 * @param loggerName  logger名称
+	 * @createTime	2017年7月24日 上午9:17:41  
+	 * @author 姜宝俊
 	 * @since  1.0.0
 	 */
-	public void insertLogs(String insertInfo, Object userId){
+	public void insertLogs(String insertInfo, Object userId, String loggerName){
+		setLogger(loggerName);
 		logger.info(userLogsStr + userId + ",插入数据:" + insertInfo);
+		restoreLogger();
 	}
 	
 	/**
-	 * errorLogs(用户操作异常)
-	 * @param 			e 					异常信息
-	 * @param 			userId 				用户Id
+	 * 操作出现异常日志
+	 * @param e 异常
+	 * @param msg 异常信息内容
+	 * @param userId 操作用户
+	 * @param loggerName  logger名称
+	 * @createTime	2017年7月24日 上午9:21:05  
+	 * @author 姜宝俊
+	 * @since  1.0.0
 	 */
-	public void errorLogs(Exception e, Object userId){
-		logger.error(userLogsStr + userId, e);
+	public void errorLogsMsg(Exception e,String msg, Object userId, String loggerName){
+		setLogger(loggerName);
+		logger.error(userLogsStr + userId + ",errorMsg:" + msg, e);
+		restoreLogger();
 	}
 	
 	/**
-	 * errorLogsMsg(用户操作异常信息)
-	 * @param 			e 					异常
-	 * @param 			msg 				解释异常信息
-	 * @param 			userId 				用户ID
+	 * 获得logger对象，供调用原始log4j方法
+	 * @return  Logger
+	 * @createTime	2017年7月24日 上午9:47:31  
+	 * @author 姜宝俊
+	 * @since  1.0.0
 	 */
-	public void errorLogsMsg(Exception e,String msg, Object userId){
-		logger.error(userLogsStr + userId + ",error msg:" + msg, e);
+	public Logger getLogger(){
+		return logger;
 	}
+
+	/**
+	 * 还原logger对象   
+	 * @name	restoreLogger
+	 * @createTime	2017年7月24日 上午9:07:57  
+	 * @author 姜宝俊
+	 * @since  1.0.0
+	 */
+	private void restoreLogger() {
+		if(VerifyHandler.INSTANCE.isVerify(oldClass)){
+			logger=Logger.getLogger(oldClass);
+		}else {
+			logger=Logger.getLogger(this.getClass());
+		}
+	}
+	
+	/**
+	 * 设置logger
+	 * @param loggerName  日志输出的定义的logger，在配置文件中定义的，如（log4j.logger.reportLogger）
+	 * @name	setLogger
+	 * @createTime	2017年7月24日 上午9:10:10  
+	 * @author 姜宝俊
+	 * @since  1.0.0
+	 */
+	private void setLogger(String loggerName) {
+		if(VerifyHandler.INSTANCE.isVerify(loggerName)){
+			logger=Logger.getLogger(loggerName);
+		}
+	}
+	
+	
+	
 }

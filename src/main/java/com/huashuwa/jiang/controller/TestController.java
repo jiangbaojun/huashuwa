@@ -53,12 +53,10 @@ public class TestController extends BaseController {
 	@ResponseBody
 	public Members getMemberByName(Members m, HttpServletRequest request, HttpServletResponse response){
 		Members members=testService.getMemberByName(m.getName());
-		Logger logger = Logger.getLogger("instanceLogger");
-		logger.info("info ");
-		logger.error("error");
-		logger.warn("warn");
-		logger.debug("debug");
-		log.selectLogs("查询用户", "me");
+		
+		log.selectLogs("查询用户1", "me","instanceLogger");
+		log.selectLogs("查询用户3", "me","operateLogger");
+		log.selectLogs("查询用户2", "me",null);
 		return members;
 	}
 	
