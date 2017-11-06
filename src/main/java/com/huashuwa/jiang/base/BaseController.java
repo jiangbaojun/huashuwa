@@ -39,7 +39,7 @@ public class BaseController {
 		try{
 			return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		}catch (HswRuntimeException e) {
-			log.errorLogsMsg(e, this.getClass() + "获取HttpServletRequest时发生异常", null);
+			log.errorLogsMsg(e, this.getClass() + "获取HttpServletRequest时发生异常", null, null);
 			throw new HswRuntimeException(ExceptionTypeDefine.JAVA_CLASS_CASH, e);
 		}
 	}
@@ -55,7 +55,7 @@ public class BaseController {
 		try{
 			return new PageData(this.getRequest());
 		}catch (HswRuntimeException e) {
-			log.errorLogsMsg(e, this.getClass() + "获取PageData时发生异常", null);
+			log.errorLogsMsg(e, this.getClass() + "获取PageData时发生异常", null, null);
 			throw new HswRuntimeException(ExceptionTypeDefine.JAVA_PAGEDATA_VALID, e);
 		}
 	}
@@ -78,7 +78,7 @@ public class BaseController {
 			page.setStart(Integer.parseInt((String) this.getPageData().get("page")));
 			return page;
 		}catch (HswRuntimeException e) {
-			log.errorLogsMsg(e, this.getClass() + "发生未知异常", null);
+			log.errorLogsMsg(e, this.getClass() + "发生未知异常", null, null);
 			throw new HswRuntimeException(ExceptionTypeDefine.UBS_OTHER_ERROR, e);
 		}
 	}
@@ -94,7 +94,7 @@ public class BaseController {
 		try{
 			return this.getRequest().getSession();
 		}catch (HswRuntimeException e) {
-			log.errorLogsMsg(e, this.getClass() + "获取HttpSession发生未知异常", null);
+			log.errorLogsMsg(e, this.getClass() + "获取HttpSession发生未知异常", null, null);
 			throw new HswRuntimeException(ExceptionTypeDefine.JAVA_NULL_POINT, e);
 		}
 	}
@@ -115,7 +115,7 @@ public class BaseController {
 			}
 			return null;
 		}catch (HswRuntimeException e) {
-			log.errorLogsMsg(e, this.getClass() + "获取用户对象时发生异常", null);
+			log.errorLogsMsg(e, this.getClass() + "获取用户对象时发生异常", null, null);
 			throw new HswRuntimeException(ExceptionTypeDefine.JAVA_CLASS_CASH, e);	
 		}
 	}
